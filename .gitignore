@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BDX.Model/obj
+/BDX.Test/bin/Debug/net6.0
+/BDX.Test/obj
+/BDX.Model/bin/Debug/net6.0
