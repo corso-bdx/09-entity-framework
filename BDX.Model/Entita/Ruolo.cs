@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BDX.Model;
 
-[Table("Ruolo", Schema = "BDX")]
-public partial class Ruolo : IEntityTypeConfiguration<Ruolo>
+[Table("Ruoli", Schema = "Bdx")]
+public class Ruolo
 {
 	[Key]
 	public string Nome { get; set; } = string.Empty;
@@ -15,12 +15,5 @@ public partial class Ruolo : IEntityTypeConfiguration<Ruolo>
 
 	public string Categoria { get; set; } = string.Empty;
 
-	public List<Utente> Utenti { get; set; } = new List<Utente>();
-
-	public void Configure(EntityTypeBuilder<Ruolo> modelBuilder)
-	{
-		modelBuilder.HasKey(t => new { t.Nome });
-
-		modelBuilder.HasMany(p => p.Utenti).WithOne(p => p.Ruolo).HasForeignKey(p => p.NomeUtente);
-	}
+	public List<Utente> ListaUtenti { get; set; } = new List<Utente>();
 }

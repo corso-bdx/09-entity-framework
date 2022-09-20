@@ -11,7 +11,9 @@ namespace BDX.Model.DTO
 
         public string Cognome { get; set; } = null!;
 
-        public string EMail { get; set; } = null!;
+        public string Email { get; set; } = null!;
+
+        public string NomeRuolo { get; set; } = null!;
 
         public DateTime DataCreazione { get; set; }
 
@@ -29,7 +31,7 @@ namespace BDX.Model.DTO
         [Required]
         [DataType(DataType.EmailAddress)]
         [RegexStringValidator(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$")]
-        public string EMail { get; set; } = null!;
+        public string Email { get; set; } = null!;
 
         [Required]
         [DataType(DataType.Password)]
@@ -39,6 +41,8 @@ namespace BDX.Model.DTO
         [DataType(DataType.Password)]
         [Compare("Password")]
         public string ConfermaPassword { get; set; } = null!;
+
+        public string NomeRuolo { get; set; } = null!;
     }
 
     public class RicercaUtente
@@ -50,7 +54,9 @@ namespace BDX.Model.DTO
         public string? Cognome { get; set; }
 
         [DataType(DataType.EmailAddress)]
-        public string? EMail { get; set; }
+        public string? Email { get; set; }
+
+        public string? NomeRuolo { get; set; }
     }
 
     public class AggiornaUtente : UtentePrimaryKey
@@ -61,7 +67,9 @@ namespace BDX.Model.DTO
 
         [DataType(DataType.EmailAddress)]
         [RegexStringValidator(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$")]
-        public string EMail { get; set; } = null!;
+        public string Email { get; set; } = null!;
+
+        public string NomeRuolo { get; set; } = null!;
     }
 
     public class AggiornaPassword : UtentePrimaryKey

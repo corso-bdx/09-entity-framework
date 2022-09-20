@@ -5,22 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BDX.Model;
 
-[Table("Accesso", Schema = "BDX")]
-public partial class Accesso : IEntityTypeConfiguration<Accesso>
+[Table("Accessi", Schema = "Bdx")]
+public class Accesso
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public string ID { get; set; } = string.Empty;
+    public int ID { get; set; }
 
     public string NomeUtente { get; set; } = string.Empty;
 
     public DateTime Data { get; set; }
 
-    public Utente Utente { get; set; } = new Utente();
-
-    public void Configure(EntityTypeBuilder<Accesso> modelBuilder)
-    {
-        modelBuilder.HasKey(t => new { t.ID });
-
-        modelBuilder.HasOne(p => p.Utente).WithMany(p => p.Accessi).HasForeignKey(p => p.NomeUtente);
-    }
+    public Utente Utente { get; set; } = null!;
 }

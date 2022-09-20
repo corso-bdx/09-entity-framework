@@ -11,6 +11,20 @@ namespace BDX.Model.Repository
         private readonly UtentiDbContext context;
         private readonly IMapper mapper;
 
+        public UtentiRepository(UtentiDbContext context)
+        {
+            this.context = context;
+            this.mapper =
+                new Mapper(
+                    new MapperConfiguration(cfg => {
+                        cfg.CreateMap<Utente, DTO.Utente>();
+                        cfg.CreateMap<DTO.Utente, Utente>();
+
+                        cfg.CreateMap<CreaUtente, Utente>();
+                        cfg.CreateMap<AggiornaUtente, Utente>();
+                    }));
+        }
+
         public UtentiRepository(IDbContextFactory<UtentiDbContext> factory, IMapper mapper)
         {
             this.context = factory.CreateDbContext();
@@ -46,12 +60,12 @@ namespace BDX.Model.Repository
 
             SaveChanges();
 
-            return mapper.Map<DTO.Utente>(utente);
+            return mapper.Map<DTO.Utente>(utente!);
         }
 
         public List<DTO.Utente> Read(RicercaUtente ricercaUtente)
         {
-            IQueryable<Utente> IQueryableUtente = context.Utenti;
+            IQueryable<Utente> IQueryableUtente = context.ListaUtenti;
 
             if (ricercaUtente.NomeUtente is not null)
                 IQueryableUtente = IQueryableUtente.Where(p => p.NomeUtente == ricercaUtente.NomeUtente);
@@ -62,10 +76,15 @@ namespace BDX.Model.Repository
             if (ricercaUtente.Cognome is not null)
                 IQueryableUtente = IQueryableUtente.Where(p => p.Cognome == ricercaUtente.Cognome);
 
-            if (ricercaUtente.EMail is not null)
-                IQueryableUtente = IQueryableUtente.Where(p => p.EMail == ricercaUtente.EMail);
+            if (ricercaUtente.Email is not null)
+                IQueryableUtente = IQueryableUtente.Where(p => p.Email == ricercaUtente.Email);
 
-            return IQueryableUtente.ToList().Select(p => mapper.Map<DTO.Utente>(p)).ToList();
+            if (ricercaUtente.NomeRuolo is not null)
+                IQueryableUtente = IQueryableUtente.Where(p => p.NomeRuolo == ricercaUtente.NomeRuolo);
+
+            var list = IQueryableUtente.ToList();
+
+            return list.Select(p => mapper.Map<DTO.Utente>(p)).ToList();
         }
 
         public DTO.Utente Update(AggiornaUtente aggiornaUtente)
@@ -111,7 +130,7 @@ namespace BDX.Model.Repository
 
         private bool TryReadFromPrimaryKey(UtentePrimaryKey utentePrimaryKey, out Utente? utente)
         {
-            utente = context.Utenti.SingleOrDefault(p => p.NomeUtente == utentePrimaryKey.NomeUtente);
+            utente = context.ListaUtenti.SingleOrDefault(p => p.NomeUtente == utentePrimaryKey.NomeUtente);
 
             return utente != null;
         }
@@ -123,6 +142,7 @@ namespace BDX.Model.Repository
 
             return utente!;
         }
+
         private string GetHash(string password, out string salt)
         {
             salt = Convert.ToBase64String(RandomNumberGenerator.GetBytes(128 / 8));
