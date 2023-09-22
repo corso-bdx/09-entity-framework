@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BDX.Model;
+namespace Bdx.Model;
 
 [Table("Utenti", Schema = "Bdx")]
 public class Utente

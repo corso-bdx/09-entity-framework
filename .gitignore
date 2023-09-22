@@ -1,12 +1,39 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
+# https://github.com/github/gitignore/blob/main/community/DotNet/core.gitignore
 
-/BDX.Model/obj
-/BDX.Test/bin/Debug/net6.0
-/BDX.Test/obj
-/BDX.Model/bin/Debug/net6.0
-.vs/BDX.EF/FileContentIndex/3b940c57-d1c9-4e11-a4bd-e0fc4da52673.vsidx
-.vs/BDX.EF/FileContentIndex/51745008-52e0-4475-af7b-7f68edac73a4.vsidx
-.vs/BDX.EF/FileContentIndex/d1a888f6-77a6-4e05-b1f2-ab0844a3ae50.vsidx
-.vs/BDX.EF/FileContentIndex/f8ea1d56-a6b2-4bfa-a8ce-a2294ee2607a.vsidx
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
+
+# Visual Studio Code
+.vscode
+
+# Rider
+.idea
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio 2015
+.vs/
